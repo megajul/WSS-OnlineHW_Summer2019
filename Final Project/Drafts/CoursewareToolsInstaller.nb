@@ -1,0 +1,257 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     10555,        247]
+NotebookOptionsPosition[     10119,        227]
+NotebookOutlinePosition[     10599,        247]
+CellTagsIndexPosition[     10556,        244]
+WindowTitle->CoursewareTools Installer
+WindowFrame->Palette*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     InterpretationBox[Cell["",
+       FontSize->15],
+      TextCell["", FontSize -> 15]]},
+    {
+     TagBox[
+      TooltipBox[
+       ButtonBox["\<\"Install | Update\"\>",
+        Appearance->Automatic,
+        ButtonFunction:>
+         Module[{$CellContext`version, $CellContext`nbs, \
+$CellContext`recordingWindows, $CellContext`lectureWindows, \
+$CellContext`otherCSWindows, $CellContext`instRes, $CellContext`progDialog, \
+$CellContext`pfr}, $CellContext`progDialog = CreateDialog[
+             Column[{
+               Style[
+                TextCell[
+                "Inspecting installation and update availability..."], 12], 
+               ProgressIndicator[
+                Dynamic[
+                 Clock[Infinity]], Indeterminate, ImageSize -> 320], 
+               TextCell[""]}, Alignment -> Center], WindowFloating -> True, 
+             WindowSize -> FitAll]; Map[PacletManager`PacletSiteUpdate, 
+            PacletManager`PacletSites[]]; 
+          ClearAll[$CellContext`version]; $CellContext`version[] := Replace[
+             Replace["Version", 
+              Quiet[
+               Check[
+                PacletManager`PacletInformation["CoursewareTools"], {}]]], 
+             "Version" -> "1.0.0"]; If[
+            And[
+            PacletManager`PacletFind["CoursewareTools"] =!= {}, StringCases[
+               ToString[
+                FindFile["CoursewareTools`"]], "Paclets"] =!= {"Paclets"}], 
+            Quiet[
+             Check[
+              PacletManager`PacletUninstall["CoursewareTools"], $Failed]]]; 
+          Which[$CellContext`nbs = Notebooks[]; $CellContext`recordingWindows = 
+             Select[$CellContext`nbs, TrueQ[
+                
+                CurrentValue[#, {
+                 TaggingRules, 
+                  "RecordingWindow"}]]& ]; $CellContext`lectureWindows = 
+             Select[$CellContext`nbs, TrueQ[
+                
+                CurrentValue[#, {
+                 TaggingRules, 
+                  "LectureSource"}]]& ]; $CellContext`otherCSWindows = 
+             Select[$CellContext`nbs, TrueQ[
+                CurrentValue[#, {TaggingRules, "CoursewareGenerated"}]]& ]; 
+            TrueQ[Length[$CellContext`recordingWindows] + 
+               Length[$CellContext`lectureWindows] + 
+               Length[$CellContext`otherCSWindows] > 0], 
+            NotebookClose[$CellContext`progDialog]; 
+            MessageDialog[
+             "Close all open CoursewareTools related windows.\nThen click the \
+Install | Update button again."]; NotebookClose[
+              ButtonNotebook[]], 
+            And[FindFile["CoursewareTools`"] =!= $Failed, StringCases[
+               FindFile["CoursewareTools`"], "Paclets"] =!= {"Paclets"}], 
+            Needs["CoursewareTools`"]; NotebookClose[$CellContext`progDialog]; 
+            MessageDialog[
+              StringJoin["CoursewareTools (", 
+               $CellContext`version[], 
+               ") has been found and loaded as a locally installed package. \
+For paclet updates, remove the installed package and re-run this \
+installer."]]; NotebookClose[
+              ButtonNotebook[]]; 
+            CoursewareTools`Control`PacletInstallPalCopy["External"], 
+            PacletManager`PacletFind[
+             "CoursewareTools"] === {}, $CellContext`instRes = Quiet[
+               Check[
+                PacletManager`PacletInstall["CoursewareTools"], "Lock", {
+                 MessageName[PacletManager`PacletInstall, "lock"]}], {
+                MessageName[PacletManager`PacletInstall, "lock"]}]; 
+            NotebookClose[$CellContext`progDialog]; If[
+              MatchQ[$CellContext`instRes, "Lock"], MessageDialog[
+                MessageName[PacletManager`PacletInstall, "lock"]]; 
+              NotebookClose[
+                ButtonNotebook[]], Needs["CoursewareTools`"]; If[
+                And[
+                 ValueQ[CoursewareTools`$AppDir], 
+                 StringCases[CoursewareTools`$AppDir, "Paclets"] === {
+                  "Paclets"}], 
+                MessageDialog[
+                 StringJoin["CoursewareTools paclet (", 
+                  $CellContext`version[], 
+                  ") has been successfully installed and loaded. Continue \
+using the same button to update the paclet for any new changes."]]]; 
+              NotebookClose[
+                ButtonNotebook[]]; 
+              CoursewareTools`Control`PacletInstallPalCopy["External"]], 
+            And[($CellContext`pfr = Cases[
+                PacletManager`PacletFindRemote["CoursewareTools"], 
+                PacletManager`Paclet[
+                  Blank[], "Version" -> Pattern[$CellContext`a, 
+                    Blank[]], 
+                  BlankSequence[]] :> $CellContext`a]) =!= {}, {
+               Part[$CellContext`pfr, 1]} === Cases[
+               PacletManager`PacletFind["CoursewareTools"], 
+               PacletManager`Paclet[
+                 Blank[], "Version" -> Pattern[$CellContext`a, 
+                   Blank[]], 
+                 BlankSequence[]] :> $CellContext`a]], 
+            Needs["CoursewareTools`"]; NotebookClose[$CellContext`progDialog]; 
+            MessageDialog[
+              StringJoin[
+              "There are no new CoursewareTools paclet updates (current: ", 
+               $CellContext`version[], 
+               "), but the package has been loaded."]]; NotebookClose[
+              ButtonNotebook[]], True, Quiet[
+              PacletManager`PacletUpdate["CoursewareTools"], {
+               MessageName[PacletManager`PacletUpdate, "uptodate"]}]; 
+            CoursewareTools`Load`$CoursewareToolsGetQ = True; 
+            Get["CoursewareTools`"]; NotebookClose[$CellContext`progDialog]; 
+            MessageDialog[
+              Row[{
+                StringJoin["CoursewareTools paclet (", 
+                 $CellContext`version[], 
+                 ") has been successfully updated.\nPlease restart the \
+Wolfram System to catch the latest stylesheet updates, etc.."]}]]; 
+            NotebookClose[
+              ButtonNotebook[]]; 
+            CoursewareTools`Control`PacletInstallPalCopy["External"]]; Null],
+        Evaluator->Automatic,
+        FrameMargins->12,
+        Method->"Queued"],
+       "\"Installs paclet if not already installed, and updates paclet \
+thereafter\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, 
+       "Installs paclet if not already installed, and updates paclet \
+thereafter", "Tooltip"]& ]},
+    {
+     ButtonBox["\<\"Uninstall Paclet\"\>",
+      Appearance->Automatic,
+      ButtonFunction:>Which[
+        And[
+        FindFile["CoursewareTools`"] === $Failed, 
+         PacletManager`PacletFind["CoursewareTools"] === {}], 
+        MessageDialog[
+         "CoursewareTools is not installed and cannot be deleted."]; 
+        NotebookClose[
+          ButtonNotebook[]], 
+        And[FindFile["CoursewareTools`"] =!= $Failed, StringCases[
+           FindFile["CoursewareTools`"], "Paclets"] =!= {"Paclets"}], 
+        MessageDialog[
+         "CoursewareTools is a locally installed package and must be removed \
+manually. After doing so, use the Install/Update button to install as a \
+paclet."]; NotebookClose[
+          ButtonNotebook[]], True, 
+        Module[{$CellContext`uninstRes}, Map[NotebookClose, 
+           Notebooks["CoursewareTools"]]; $CellContext`uninstRes = Quiet[
+            Check[
+             Quiet[
+              PacletManager`PacletUninstall["CoursewareTools"], {
+               MessageName[PacletManager`PacletUninstall, "open"]}], "Lock", {
+              MessageName[PacletManager`PacletUninstall, "lock"]}], {
+             MessageName[PacletManager`PacletUninstall, "lock"]}]; If[
+           MatchQ[$CellContext`uninstRes, "Lock"], 
+           MessageDialog[
+            MessageName[PacletManager`PacletUninstall, "lock"]], 
+           SetAttributes[FrontEnd`RemoveMenuCommands, HoldRest]; 
+           FrontEndExecute[{
+              FrontEnd`RemoveMenuCommands["NewText", {
+                Item["Course Lecture", 
+                 FrontEnd`KernelExecute[
+                  EvaluatePacket[
+                  Needs["CoursewareTools`"]; 
+                   CoursewareTools`Utilities`CourseTemplate[]]], 
+                 FrontEnd`MenuEvaluator -> Automatic]}], 
+              FrontEnd`RemoveMenuCommands["StyleOther", {
+                Item["Insert Input Cell", 
+                 FrontEnd`KernelExecute[
+                  EvaluatePacket[
+                  Needs["CoursewareTools`"]; 
+                   CoursewareTools`Templates`InputTemplate[
+                    InputNotebook[]]]], FrontEnd`MenuEvaluator -> Automatic, 
+                 $CellContext`MenuKey[
+                 "9", $CellContext`Modifiers -> {"Command"}]]}]}]; 
+           MessageDialog["CoursewareTools paclet removed."]; NotebookClose[
+             ButtonNotebook[]]]]],
+      Evaluator->Automatic,
+      FrameMargins->5,
+      Method->"Queued"]}
+   },
+   DefaultBaseStyle->"Column",
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0}}}],
+  "Column"]],
+ CellMargins->{{0, 0}, {0, 0}},
+ CellBracketOptions->{"Color"->RGBColor[0.269993, 0.308507, 0.6]},
+ CellHorizontalScrolling->True,
+ PageBreakAbove->True,
+ PageBreakWithin->False,
+ ShowAutoStyles->True,
+ LineSpacing->{1.25, 0},
+ AutoItalicWords->{},
+ ScriptMinSize->9,
+ ShowStringCharacters->False,
+ FontFamily:>CurrentValue["PanelFontFamily"],
+ FontSize:>CurrentValue["PanelFontSize"]]
+},
+Saveable->False,
+WindowSize->{230, 130},
+WindowMargins->{{Automatic, Automatic}, {Automatic, Automatic}},
+WindowElements->{},
+WindowTitle->"CoursewareTools Installer",
+DockedCells->{},
+TextAlignment->Center,
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 12, 2016)",
+StyleDefinitions->"Palette.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[598, 21, 9517, 204, 98, InheritFromParent,
+ PageBreakAbove->True,
+ PageBreakWithin->False]
+}
+]
+*)
+
+(* End of internal cache information *)
+
